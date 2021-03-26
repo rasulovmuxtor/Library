@@ -10,3 +10,5 @@ urlpatterns = [
     path('token-auth/', obtain_auth_token, name='token_auth'),
     path('change-password/',views.ChangePasswordView.as_view(),name='change-password')
 ]
+
+
