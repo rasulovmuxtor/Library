@@ -4,9 +4,11 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/admin/',include('admin_api.urls')),
     path('user/',include('user.urls')),
     path('ebooks/',include('ebooks.urls')),
 ]
+
 if settings.DEBUG:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns

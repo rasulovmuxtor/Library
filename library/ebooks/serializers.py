@@ -1,15 +1,14 @@
 from rest_framework import serializers
 from ebooks.models import Ebook
 
+
+
 class EbookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ebook
-        exclude = ('id', 'publisher')
-        read_only_fields = ('publisher','slug','added_at','updated_at')
-        lookup_field = 'slug'
-        extra_kwargs = {
-            'url': {'lookup_field': 'slug'}
-        }
+        exclude = ('id', 'publisher','added_at','updated_at')
+        read_only_fields = ('slug',)
+        
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         files = {}
