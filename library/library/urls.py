@@ -1,12 +1,15 @@
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from ebooks.views import ApiRoot
 
 urlpatterns = [
+    path("",ApiRoot.as_view(),name="root-endpoints"),
     path('admin/', admin.site.urls),
     path('api/admin/',include('admin_api.urls')),
     path('user/',include('user.urls')),
     path('ebooks/',include('ebooks.urls')),
+    path('books/',include('books.urls')),
 ]
 
 if settings.DEBUG:

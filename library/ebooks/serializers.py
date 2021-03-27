@@ -24,11 +24,17 @@ class EbookSerializer(serializers.ModelSerializer):
                 "url": pdf,
                 "size": instance.pdf.size
                 }
+        else:
+            files['pdf']=None
+        
         if djvu:
             files['djvu']={
                 "url": djvu,
                 "size": instance.djvu.size
                 }
+        else:
+            files['djvu']=None
+
         if epub:
             files['epub']={
                 "url": epub,
@@ -39,11 +45,14 @@ class EbookSerializer(serializers.ModelSerializer):
                 "url": mobi,
                 "size": instance.mobi.size
                 }
+        else:
+            files['mobi']=None
         if doc:
             files['doc']={
                 "url": doc,
                 "size": instance.doc.size
                 }
-
+        else:
+            files['doc']=None
         representation['files'] = files
         return representation

@@ -5,17 +5,17 @@ from user.models import Student
 class Book(AbstractBook):
     copies = models.PositiveSmallIntegerField()
 
-    @property
-    def available(self):
-        return self.copies-self.borrowing.count()
-
 
 class Borrowing(models.Model):
     book = models.ForeignKey(Book,on_delete=models.CASCADE,related_name='borrowing')
     student = models.ForeignKey(Student,on_delete=models.CASCADE,related_name='borrowing')
     returned = models.BooleanField(default=False)
-    until_time = models.DateTimeField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    until_date = models.DateField()
+    created_at = models.DateField(auto_now_add=True)
+
+    def clean(self):
+        if self.book.copies-self.book.borrowing.filter(returned=False).count()==0:
+            raise ValidationError(_('The book not available'))
 
 
     def __str__(self):

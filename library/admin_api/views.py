@@ -1,9 +1,13 @@
+from books.models import Book, Borrowing
 from ebooks.models import Ebook
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from admin_api.serializers import EbookAdminSerializer, StudentAdminSerializer, BookAdminSerializer
-from books.models import Book,Borrowing
 from user.models import Student
+
+from admin_api.serializers import (BookAdminSerializer,
+                                   BorrowingAdminSerializer,
+                                   EbookAdminSerializer,
+                                   StudentAdminSerializer)
 
 
 class EbookAdminViewSet(viewsets.ModelViewSet):
@@ -29,3 +33,8 @@ class StudentAdminViewSet(viewsets.ModelViewSet):
     serializer_class = StudentAdminSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = 'student_id'
+
+class BorrowingAdminViewSet(viewsets.ModelViewSet):
+    queryset = Borrowing.objects.all()
+    serializer_class = BorrowingAdminSerializer
+    permission_classes = [IsAuthenticated]
