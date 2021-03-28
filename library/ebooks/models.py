@@ -90,4 +90,4 @@ class Ebook(AbstractBook):
         if not (self.pdf or self.djvu or self.epub or self.mobi or self.doc):
             raise ValidationError(_('Ebook cannot be None! Please upload at least one'))
     class Meta:
-        ordering = ('updated_at',)
+        ordering = ('-publication_date','-updated_at')
